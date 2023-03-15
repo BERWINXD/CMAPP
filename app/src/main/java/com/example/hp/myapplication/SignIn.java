@@ -51,10 +51,6 @@ public class SignIn extends AppCompatActivity {
             progressDialog.setMessage("Please wait!");
 //            progressDialog.show();
 
-            Intent home = new Intent(SignIn.this, Home.class);
-            startActivity(home);
-//            finish();
-
 //            table_user.addValueEventListener(new ValueEventListener() {
 //                @Override
 //                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -84,6 +80,11 @@ public class SignIn extends AppCompatActivity {
 //
 //            });
         });
+
+        // Remove the below code after fixing firebase users login above
+        Intent home = new Intent(SignIn.this, Home.class);
+        startActivity(home);
+        finish();
 
     }
 }
