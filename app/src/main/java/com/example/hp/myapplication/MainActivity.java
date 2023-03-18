@@ -1,17 +1,14 @@
 package com.example.hp.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.example.hp.myapplication.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button signInButton, SignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +20,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        signInButton = findViewById(R.id.btnSignIn);
+        Button signInButton = findViewById(R.id.btnSignIn);
+        Button signUpButton = findViewById(R.id.btnSignUp);
         signInButton.setOnClickListener(l -> {
-            Intent secondActivityIntent = new Intent(this, SignIn.class);
-            startActivity(secondActivityIntent);
+            startActivity(new Intent(this, SignIn.class));
+            finish();
         });
+        signUpButton.setOnClickListener(l ->
+                startActivity(new Intent(this, SignUp.class))
+        );
     }
 }
