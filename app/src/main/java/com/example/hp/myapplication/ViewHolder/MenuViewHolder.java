@@ -22,9 +22,9 @@ public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public MenuViewHolder(final View itemView) {
         super(itemView);
-        cv1 = itemView.findViewById(R.id.cardv1);
-        cv2 = itemView.findViewById(R.id.cardv2);
-        cv3 = itemView.findViewById(R.id.cardv3);
+        cv1 = itemView.findViewById(R.id.item1);
+        cv2 = itemView.findViewById(R.id.item2);
+        cv3 = itemView.findViewById(R.id.item3);
         cv1.setOnClickListener(v -> {
             txtMenuName = itemView.findViewById(R.id.menu_name);
             imageView = itemView.findViewById(R.id.menu_image);

@@ -24,13 +24,13 @@ public class Database extends SQLiteAssetHelper {
     @SuppressLint("Range")
     public List<Order> getCarts() {
         SQLiteDatabase db = getReadableDatabase();
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
         String[] sqlSelect = {"ProductName", "ProductId", "Quantity", "Price", "Discount"};
-        String sqlTable = "OrderDetail";
+        String sqlTable = "Order";
 
-        qb.setTables(sqlTable);
-        Cursor cursor = qb.query(db, sqlSelect, null, null, null, null, null);
+        queryBuilder.setTables(sqlTable);
+        Cursor cursor = queryBuilder.query(db, sqlSelect, null, null, null, null, null);
 
         final List<Order> result = new ArrayList<>();
         if (cursor.moveToFirst()) {
@@ -40,8 +40,8 @@ public class Database extends SQLiteAssetHelper {
                                 cursor.getString(cursor.getColumnIndex("ProductId")),
                                 cursor.getString(cursor.getColumnIndex("ProductName")),
                                 cursor.getString(cursor.getColumnIndex("Quantity")),
-                                cursor.getString(cursor.getColumnIndex("Price"))
-// TODO: Wtf? mismatched Arguments    cursor.getString(cursor.getColumnIndex("Discount"))
+                                cursor.getString(cursor.getColumnIndex("Price")),
+                                cursor.getString(cursor.getColumnIndex("Discount"))
                         ));
             } while (cursor.moveToNext());
         }
@@ -66,5 +66,21 @@ public class Database extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         String query = "DELETE FROM OrderDetail";
         db.execSQL(query);
+    }
+
+    public Cursor getCart() {
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect = {"0 _id", "FirstName", "LastName"};
+        String sqlTables = "Employees";
+
+        qb.setTables(sqlTables);
+        Cursor c = qb.query(db, sqlSelect, null, null,
+                null, null, null);
+
+        c.moveToFirst();
+        return c;
+
     }
 }

@@ -1,7 +1,10 @@
 package com.example.hp.myapplication.CustomComponents;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +16,16 @@ public class ElegantNumberButton extends androidx.appcompat.widget.AppCompatButt
 
     public ElegantNumberButton(@NonNull Context context) {
         super(context);
+        counter = "0";
+    }
+
+    public ElegantNumberButton(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        counter = "0";
+    }
+
+    public ElegantNumberButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         counter = "0";
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/signup"
+    android:background="@drawable/appmain"
     tools:context="com.example.hp.myapplication.SignIn">
 
     <LinearLayout
@@ -24,11 +24,20 @@
             android:inputType="textEmailAddress"
             android:text="markfds2014@gmail.com"
             android:textColor="#FFFFFF"
-            android:textColorHint="@android:color/white"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textColorLink="#FFFFFF"
             android:textSize="20sp"
+            app:met_baseColor="#FFFFFF"
+            app:met_errorColor="#FF0000"
             app:met_floatingLabel="highlight"
+            app:met_floatingLabelTextColor="#FFFFFF"
+            app:met_helperTextColor="#FFFFFF"
             app:met_primaryColor="#FFFFFF"
-            app:met_singleLineEllipsis="true" />
+            app:met_singleLineEllipsis="true"
+            app:met_textColor="#FFFFFF"
+            app:met_textColorHint="#FFFFFF"
+            app:met_underlineColor="#FFFFFF" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPassword"
@@ -37,9 +46,8 @@
             android:hint="Password:"
             android:inputType="textPassword"
             android:text="1234567"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
             android:textSize="20sp"
+            app:met_baseColor="#FFFFFF"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
             app:met_primaryColor="@android:color/white"

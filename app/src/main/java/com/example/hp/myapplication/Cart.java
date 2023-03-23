@@ -60,48 +60,47 @@ public class Cart extends AppCompatActivity {
     }
 
     private void showAlertDialog() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(Cart.this);
-            builder.setTitle("One More Step!");
+        AlertDialog.Builder builder = new AlertDialog.Builder(Cart.this);
+        builder.setTitle("One More Step!");
 
-            final EditText edtAddress = new EditText(Cart.this);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
+        final EditText edtAddress = new EditText(Cart.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        edtAddress.setLayoutParams(lp);
+        builder.setView(edtAddress);
+        builder.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+        builder.setPositiveButton("YES", (dialog, which) -> {
+            Request request = new Request(
+                    Common.currentUser.getName(),
+                    edtAddress.getText().toString(),
+                    txtTotalPrice.getText().toString(),
+                    cart
             );
-            edtAddress.setLayoutParams(lp);
-            builder.setView(edtAddress);
-            builder.setIcon(R.drawable.ic_shopping_cart_black_24dp);
-            builder.setPositiveButton("YES", (dialog, which) -> {
-                Request request = new Request(
-                        Common.currentUser.getName(),
-                        edtAddress.getText().toString(),
-                        txtTotalPrice.getText().toString(),
-                        cart
-                );
-                requests.child(String.valueOf(System.currentTimeMillis())).setValue(request);
-                try (Database database = new Database(getBaseContext())) {
-                    database.cleanCart();
-                    Toast.makeText(Cart.this, "Your Order has been Confirmed!", Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e){
-                    Toast.makeText(Cart.this, "Operation Failed", Toast.LENGTH_SHORT).show();
-                }
-                finish();
-            });
-            builder.show();
-        }
+            requests.child(String.valueOf(System.currentTimeMillis())).setValue(request);
+            try (Database database = new Database(getBaseContext())) {
+                database.cleanCart();
+                Toast.makeText(Cart.this, "Your Order has been Confirmed!", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(Cart.this, "Operation Failed", Toast.LENGTH_SHORT).show();
+            }
+            finish();
+        });
+        builder.show();
+    }
 
     private void loadListFood() {
-        try(Database database = new Database(this)){
+        try (Database database = new Database(getApplicationContext())) {
             cart = database.getCarts();
-            adapter = new CartAdapter(cart,this);
+            adapter = new CartAdapter(cart, this);
             recyclerView.setAdapter(adapter);
 
             //total price
             int total = 0;
-            for(Order order:cart)
-                total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
-            Locale locale = new Locale("en","US");
+            for (Order order : cart)
+                total += (Integer.parseInt(order.getPrice())) * (Integer.parseInt(order.getQuantity()));
+            Locale locale = new Locale("en", "US");
             NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
             txtTotalPrice.setText(fmt.format(total));

@@ -44,7 +44,6 @@ public class FoodDetail extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         foods = database.getReference("Foods");
 
-        //views linking
         numberButton = findViewById(R.id.number_button1);
         btncart = findViewById(R.id.btncart);
 
@@ -53,7 +52,7 @@ public class FoodDetail extends AppCompatActivity {
                 database1.addToCart(new Order(foodId,
                         currentFood.getName(),
                         numberButton.getCounter(),
-                        currentFood.getPrice()));
+                        currentFood.getPrice(), "0"));
                 Toast.makeText(FoodDetail.this, "Added to cart", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(FoodDetail.this, "Operation Failed", Toast.LENGTH_SHORT).show();
