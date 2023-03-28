@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:hint="Email ID:"
             android:inputType="textEmailAddress"
-            android:text="markfds2014@gmail.com"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:met_floatingLabel="highlight"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:hint="Password:"
             android:inputType="textPassword"
-            android:text="1234567"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:met_floatingLabel="highlight"
@@ -55,7 +55,7 @@
             android:layout_height="84dp"
             android:hint="Confirm Password:"
             android:inputType="textPassword"
-            android:text="1234567"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:met_floatingLabel="highlight"
@@ -63,7 +63,15 @@
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
 
+
+
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -73,5 +81,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="61dp"
         android:text="SignUp" />
+
+
 
 </RelativeLayout>

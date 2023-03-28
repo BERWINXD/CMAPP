@@ -22,7 +22,7 @@
             android:background="#FFFFFF"
             android:hint="Email ID:"
             android:inputType="textEmailAddress"
-            android:text="markfds2014@gmail.com"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textColorHighlight="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:hint="Password:"
             android:inputType="textPassword"
-            android:text="1234567"
+            android:text=""
             android:textSize="20sp"
             app:met_baseColor="#FFFFFF"
             app:met_floatingLabel="highlight"
@@ -54,6 +54,11 @@
             app:met_singleLineEllipsis="true" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="wrap_content"
@@ -62,5 +67,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="97dp"
         android:text="SignIn" />
+
+
 
 </RelativeLayout>
