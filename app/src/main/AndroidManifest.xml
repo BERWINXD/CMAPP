@@ -25,11 +25,11 @@
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Home"
+            android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".SignUp" />
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignUpActivity" />
 
         <activity android:name=".FoodList" />
         <activity android:name=".FoodDetail" />

@@ -6,39 +6,24 @@ import static com.example.hp.myapplication.R.string;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.bumptech.glide.Glide;
 import com.example.hp.myapplication.Common.Common;
-import com.example.hp.myapplication.Model.Category;
-import com.example.hp.myapplication.Model.Food;
 import com.example.hp.myapplication.Model.Order;
-import com.example.hp.myapplication.ViewHolder.MenuViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
-public class Home extends AppCompatActivity
+public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtFullName;
@@ -57,7 +42,7 @@ public class Home extends AppCompatActivity
 
         FloatingActionButton fab = findViewById(id.fab);
         fab.setOnClickListener(view -> {
-            Intent cart = new Intent(Home.this, Cart.class);
+            Intent cart = new Intent(HomeActivity.this, Cart.class);
             startActivity(cart);
         });
 
@@ -106,14 +91,11 @@ public class Home extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case id.nav_menu:
-                startActivity(new Intent(Home.this, FoodList.class));
-                break;
             case id.nav_cart:
-                startActivity(new Intent(Home.this, Cart.class));
+                startActivity(new Intent(HomeActivity.this, Cart.class));
                 break;
             case id.nav_orders:
-                startActivity(new Intent(Home.this, Order.class));
+                startActivity(new Intent(HomeActivity.this, Order.class));
                 break;
             case id.nav_signout:
                 FirebaseAuth.getInstance().signOut();
@@ -128,7 +110,7 @@ public class Home extends AppCompatActivity
     }
 
     private void navigateIntent(String itemNo) {
-        Intent intent = new Intent(Home.this, FoodList.class);
+        Intent intent = new Intent(HomeActivity.this, FoodList.class);
         intent.putExtra("item", itemNo);
         startActivity(intent);
     }
