@@ -21,6 +21,40 @@ public class ResourceLoader {
             return R.drawable.chickenburger;
         else if (Objects.equals(resourceName, "VEG Fried Rice"))
             return R.drawable.nonvegfriedrice;
+        else if(Objects.equals(resourceName, "Veg Samosas"))
+            return R.drawable.vegsamosas;
+        else if(Objects.equals(resourceName, "VEG Sandwich"))
+            return R.drawable.vegsandwish;
+        else if(Objects.equals(resourceName, "Chutney Cheese Sandwich"))
+            return R.drawable.chutneycheesesandwich;
+        else if(Objects.equals(resourceName, "VEG Grilled Sandwich"))
+            return R.drawable.veggrilledsandwich;
+        else if(Objects.equals(resourceName, "VEG Burger"))
+            return R.drawable.vegburger;
+        else if(Objects.equals(resourceName, "Bhaji Bread"))
+            return R.drawable.bhajibread;
+        else if(Objects.equals(resourceName, "Bhaji Paratha"))
+            return R.drawable.bhajiparatha;
+        else if(Objects.equals(resourceName, "VEG Noodles"))
+            return R.drawable.vegnoodles;
+        else if(Objects.equals(resourceName, "VEG Frriedd Rice"))
+            return R.drawable.vegfriedrice;
+        else if(Objects.equals(resourceName, "Tea"))
+            return R.drawable.tea;
+        else if(Objects.equals(resourceName, "Lime Soda"))
+            return R.drawable.limesoda;
+        else if(Objects.equals(resourceName, "Pineapple Juice"))
+            return R.drawable.pineapplejuice;
+        else if(Objects.equals(resourceName, "Falooda"))
+            return R.drawable.falooda;
+        else if(Objects.equals(resourceName, "Water Bottle"))
+            return R.drawable.waterbottle;
+        else if(Objects.equals(resourceName, "Tropicana Juice"))
+            return R.drawable.tropicana;
+        else if(Objects.equals(resourceName, "Chickoo Juice"))
+            return R.drawable.chickoojuice;
+        else if(Objects.equals(resourceName, "Watermelon Juice"))
+            return R.drawable.watermelonjuice;
         return 0;
 
         // No Resources Available for:
