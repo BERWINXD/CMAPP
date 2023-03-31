@@ -1,5 +1,6 @@
 package com.example.hp.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +25,7 @@ import java.util.Map;
 
 public class FoodList extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     private List<Product> products;
 
@@ -80,12 +82,14 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
         private final ImageView imageView;
+        private final CardView cardView;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
             textView = view.findViewById(R.id.text);
             imageView = view.findViewById(R.id.image);
+            cardView = view.findViewById(R.id.row_item_wrapper);
         }
 
         public TextView getTextView() {
@@ -94,6 +98,10 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
         public ImageView getImageView() {
             return imageView;
+        }
+
+        public CardView getCardView() {
+            return cardView;
         }
     }
 
@@ -115,6 +123,13 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
         int resource = ResourceLoader.getResource(localDataSet.get(position).getpName());
         if (resource != 0)
             viewHolder.getImageView().setImageResource(resource);
+        viewHolder.getCardView().setOnClickListener(listener -> {
+            Intent intent = new Intent(listener.getContext(), FoodDetail.class);
+            intent.putExtra("FoodId", localDataSet.get(position).getpId());
+            intent.putExtra("FoodName", localDataSet.get(position).getpName());
+            intent.putExtra("FoodPrice", localDataSet.get(position).getPrice());
+            listener.getContext().startActivity(intent);
+        });
     }
 
     @Override
