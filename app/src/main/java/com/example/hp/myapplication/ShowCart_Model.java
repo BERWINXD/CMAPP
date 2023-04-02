@@ -2,15 +2,15 @@ package com.example.hp.myapplication;
 
 public class ShowCart_Model {
     private String Product_Name;
-    private String Price;
+    private String Product_Price;
 
-    public ShowCart_Model(){
+    public ShowCart_Model() {
 
     }
 
     public ShowCart_Model(String product_Name, String price) {
-        Product_Name = product_Name;
-        Price = price;
+        this.Product_Name = product_Name;
+        this.Product_Price = price;
     }
 
     public String getProduct_Name() {
@@ -21,11 +21,11 @@ public class ShowCart_Model {
         Product_Name = product_Name;
     }
 
-    public String getPrice() {
-        return Price;
+    public String getProduct_Price() {
+        return Product_Price;
     }
 
-    public void setPrice(String price) {
-        Price = price;
+    public void setProduct_Price(String price) {
+        Product_Price = price;
     }
 }
