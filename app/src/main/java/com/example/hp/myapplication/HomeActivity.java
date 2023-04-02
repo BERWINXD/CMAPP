@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
 
         FloatingActionButton fab = findViewById(id.fab);
         fab.setOnClickListener(view -> {
-            Intent cart = new Intent(HomeActivity.this, Cart.class);
+            Intent cart = new Intent(HomeActivity.this, ShowCart.class);
             startActivity(cart);
         });
 
@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case id.nav_cart:
-                startActivity(new Intent(HomeActivity.this, Cart.class));
+                startActivity(new Intent(HomeActivity.this, ShowCart.class));
                 break;
             case id.nav_orders:
                 startActivity(new Intent(HomeActivity.this, Order.class));

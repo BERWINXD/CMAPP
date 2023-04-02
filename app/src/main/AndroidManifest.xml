@@ -12,14 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ShowCart"
+            android:exported="false" />
+        <activity
             android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_welcome"
@@ -30,7 +33,6 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
-
         <activity android:name=".FoodList" />
         <activity android:name=".FoodDetail" />
         <activity android:name=".Cart" />
