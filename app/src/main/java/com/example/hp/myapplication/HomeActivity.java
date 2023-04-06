@@ -6,11 +6,13 @@ import static com.example.hp.myapplication.R.string;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,18 +46,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txtFullName;
 
     FirebaseAuth mAuth;
-    FirebaseDatabase database;
     DatabaseReference category;
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
 
+    private List<Category> categories;
+
+    private static final String TAG = "HomeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +74,8 @@ public class HomeActivity extends AppCompatActivity
 
         setSupportActionBar(toolbar);
 
-        database = FirebaseDatabase.getInstance();
-        category = database.getReference("Category");
+        category = FirebaseDatabase.getInstance().getReference("Category");
+        categories = new ArrayList<>();
 
         FloatingActionButton fab = findViewById(id.fab);
         fab.setOnClickListener(view -> {
@@ -83,61 +92,42 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
         View headerView = navigationView.getHeaderView(0);
         txtFullName = headerView.findViewById(id.txtFullName);
         if (Common.currentUser != null)
             txtFullName.setText(Common.currentUser.getName() == null ? "Tester" : Common.currentUser.getName());
         else txtFullName.setText("Tester");
 
-
-        recycler_menu = (RecyclerView) findViewById(id.recycler_menu);
+        recycler_menu = findViewById(id.recycler_menu);
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
-
-
     }
 
     private void loadMenu() {
-        FirebaseRecyclerOptions<Category> options =
-                new FirebaseRecyclerOptions.Builder<Category>()
-                        .setQuery(category, Category.class)
-                        .build();
 
-        FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull Category model) {
-                        holder.txtMenuName.setText(model.getName());
-                        Glide.with(HomeActivity.this).load(model.getImage()).into(holder.imageView);
-                        Category clickitem = model;
-                        holder.setItemClickListener(new ItemClickListener() {
-                            @Override
-                            public void onClick(View view, int position, boolean isLongClick) {
-                                Toast.makeText(HomeActivity.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+        category.get().addOnCompleteListener(taskCompletion -> {
+            if (taskCompletion.isSuccessful()) {
+                Map<String, Object> message = (Map<String, Object>) taskCompletion.getResult().getValue();
+                if (message != null) {
+                    for (Object o : message.values()) {
+                        String s = String.valueOf(o);
+                        String[] params = s.substring(1, s.length() - 1).split(",");
+                        Category category = new Category(
+                                params[1].trim().split("=")[1],
+                                params[0].substring(6)
+                        );
+                        categories.add(category);
+                        Log.d(TAG, params[0].substring(6) + " : " + params[1] + " : " + params.length);
                     }
-
-                    @NonNull
-                    @Override
-                    public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_list, parent, false);
-                        return new MenuViewHolder(view);
-                    }
-                };
-
-
-
-        recycler_menu.setAdapter(adapter);
-
-
-
+                    recycler_menu.setAdapter(new CategoryAdapter(categories));
+                }
+            }
+        });
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(id.drawer_layout);
@@ -180,7 +170,7 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    private void navigateIntent(String itemNo) {
+    public void navigateIntent(String itemNo) {
         Intent intent = new Intent(HomeActivity.this, FoodList.class);
         intent.putExtra("item", itemNo);
         startActivity(intent);
@@ -188,3 +178,60 @@ public class HomeActivity extends AppCompatActivity
 
 }
 
+class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+
+    private final List<Category> localDataSet;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView textView;
+        private final ImageView imageView;
+        private final CardView cardView;
+
+        public ViewHolder(View view) {
+            super(view);
+            textView = view.findViewById(id.menu_name);
+            imageView = view.findViewById(id.menu_image);
+            cardView = view.findViewById(id.categorywrapper);
+        }
+
+        public TextView getTextView() {
+            return textView;
+        }
+
+        public ImageView getImageView() {
+            return imageView;
+        }
+
+        public CardView getCardView() {
+            return cardView;
+        }
+    }
+
+    public CategoryAdapter(List<Category> localDataSet) {
+        this.localDataSet = localDataSet;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.menu_list, viewGroup, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        viewHolder.getTextView().setText(localDataSet.get(position).getName());
+        Glide.with(viewHolder.imageView.getContext()).load(localDataSet.get(position).getImage()).into(viewHolder.getImageView());
+        viewHolder.getCardView().setOnClickListener(listener -> {
+            Intent intent = new Intent(listener.getContext(), FoodList.class);
+            intent.putExtra("item", localDataSet.get(position).getName());
+            listener.getContext().startActivity(intent);
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return localDataSet.size();
+    }
+}
