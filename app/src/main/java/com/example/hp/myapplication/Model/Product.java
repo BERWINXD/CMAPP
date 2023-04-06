@@ -1,5 +1,7 @@
 package com.example.hp.myapplication.Model;
 
+
+
 import androidx.annotation.NonNull;
 
 public class Product {
@@ -7,6 +9,8 @@ public class Product {
     private String pName;
     private String pType;
     private float price;
+
+
 
     public Product() {
     }  // Needed for Firebase

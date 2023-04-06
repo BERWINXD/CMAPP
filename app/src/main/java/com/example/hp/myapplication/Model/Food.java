@@ -2,10 +2,14 @@ package com.example.hp.myapplication.Model;
 
 public class Food {
     private String name;
-    private final String image;
-    private final String description;
-    private final String price;
-    private final String menuId;
+
+
+
+    private  String image;
+
+    private  String description;
+    private  String price;
+    private  String menuId;
 
     public Food(String name, String image, String description, String price, String menuId) {
         this.name = name;
@@ -27,6 +31,10 @@ public class Food {
         return image;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -37,5 +45,17 @@ public class Food {
 
     public String getMenuId() {
         return menuId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 }

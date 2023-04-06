@@ -14,29 +14,20 @@ public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public TextView txtMenuName;
     public ImageView imageView;
-    public final CardView cv1;
-    public final CardView cv2;
-    public final CardView cv3;
+
+
 
     private ItemClickListener itemClickListener;
 
     public MenuViewHolder(final View itemView) {
         super(itemView);
-        cv1 = itemView.findViewById(R.id.item1);
-        cv2 = itemView.findViewById(R.id.item2);
-        cv3 = itemView.findViewById(R.id.item3);
-        cv1.setOnClickListener(v -> {
+
+
+
             txtMenuName = itemView.findViewById(R.id.menu_name);
             imageView = itemView.findViewById(R.id.menu_image);
-        });
-        cv2.setOnClickListener(v -> {
-            txtMenuName = itemView.findViewById(R.id.menu_name1);
-            imageView = itemView.findViewById(R.id.menu_image1);
-        });
-        cv3.setOnClickListener(v -> {
-            txtMenuName = itemView.findViewById(R.id.menu_name2);
-            imageView = itemView.findViewById(R.id.menu_image2);
-        });
+
+
 
         itemView.setOnClickListener(this);
     }

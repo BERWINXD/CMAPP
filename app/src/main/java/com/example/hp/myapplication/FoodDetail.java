@@ -54,15 +54,19 @@ public class FoodDetail extends AppCompatActivity {
         if (resourceId != 0)
             food_image.setImageResource(resourceId);
 
-        String ID_Cart = reference.push().getKey();
-        Log.d("Firebase", "onCreate: " + ID_Cart);
+
+
         btncart.setOnClickListener(view -> {
+
+
             HashMap<String, String> parameters = new HashMap<>();
             parameters.put("Product_Name", food_name.getText().toString());
             parameters.put("Product_Price", food_price.getText().toString());
 
             // Since ID_Cart is generated at OnCreate, only the first item will be added,
             // Subsequent items will just update it.
+            String ID_Cart = reference.push().getKey();
+            Log.d("Firebase", "onCreate: " + ID_Cart);
             reference.child(ID_Cart).setValue(parameters);
             startActivity(new Intent(FoodDetail.this, ShowCart.class));
         });

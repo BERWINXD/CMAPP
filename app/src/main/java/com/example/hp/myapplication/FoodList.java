@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hp.myapplication.Common.ResourceLoader;
 import com.example.hp.myapplication.Model.Product;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -26,6 +27,10 @@ import java.util.Map;
 public class FoodList extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutmanager;
+
+    FirebaseDatabase database;
+    DatabaseReference foodlist;
 
     private List<Product> products;
 
@@ -34,9 +39,14 @@ public class FoodList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
+        database = FirebaseDatabase.getInstance();
+        foodlist = database.getReference("Products");
+
         recyclerView = findViewById(R.id.recycler_food);
-        products = new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        layoutmanager = new LinearLayoutManager(this);
+        //products = new ArrayList<>();
+        recyclerView.setLayoutManager(layoutmanager);
 
         String categoryId = getIntent().getStringExtra("item");
 

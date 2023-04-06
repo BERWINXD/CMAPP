@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/items"
+    android:id="@+id/items1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    app:cardElevation="4dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/item1"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        app:cardBackgroundColor="#000000"
-        app:cardElevation="4dp">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,82 +28,12 @@
                 android:layout_marginBottom="0dp"
                 android:background="#7f333639"
                 android:gravity="center"
-                android:text="Non-Veg"
+                android:text="Menu Name"
                 android:textColor="@android:color/white"
                 android:textSize="70sp" />
 
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/item2"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        app:cardBackgroundColor="#000000"
-        app:cardElevation="4dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/menu_image1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/veg" />
-
-            <TextView
-                android:id="@+id/menu_name1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="0dp"
-                android:background="#7f333639"
-                android:gravity="center"
-                android:text="Veg"
-                android:textColor="@android:color/white"
-                android:textSize="70sp" />
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/item3"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        app:cardBackgroundColor="#000000"
-        app:cardElevation="4dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/menu_image2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/beverages" />
-
-            <TextView
-                android:id="@+id/menu_name2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="0dp"
-                android:background="#7f333639"
-                android:gravity="center"
-                android:text="Beverages"
-                android:textColor="@android:color/white"
-                android:textSize="70sp" />
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+</androidx.cardview.widget.CardView>
