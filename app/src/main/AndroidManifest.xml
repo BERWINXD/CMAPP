@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ShowCart"
+            android:name=".Cart"
             android:exported="false" />
         <activity
             android:name=".WelcomeActivity"
@@ -35,7 +35,6 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".FoodList" />
         <activity android:name=".FoodDetail" />
-        <activity android:name=".Cart" />
     </application>
 
 </manifest>

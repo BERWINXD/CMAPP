@@ -22,13 +22,11 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     public TextView txt_cart_name;
     public final TextView txt_price;
-    public final ImageView img_cart_count;
 
     public CartViewHolder(View itemView) {
         super(itemView);
         txt_cart_name = itemView.findViewById(R.id.cart_item_name);
         txt_price = itemView.findViewById(R.id.cart_item_price);
-        img_cart_count = itemView.findViewById(R.id.cart_item_count);
     }
 
     @Override

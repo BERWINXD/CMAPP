@@ -2,8 +2,6 @@ package com.example.hp.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hp.myapplication.Common.ResourceLoader;
 import com.example.hp.myapplication.CustomComponents.ElegantNumberButton;
+import com.example.hp.myapplication.Model.CartModel;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,29 +21,25 @@ import java.util.Objects;
 
 public class FoodDetail extends AppCompatActivity {
 
-    TextView food_name, food_price, food_description;
-    ImageView food_image;
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    FloatingActionButton btncart;
-    ElegantNumberButton numberButton;
+    private TextView food_name, food_price;
+    private ElegantNumberButton itemCounter;
 
-    private DatabaseReference reference;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
-        reference = FirebaseDatabase.getInstance().getReference("AddToCart").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
-        numberButton = findViewById(R.id.number_button);
-        btncart = findViewById(R.id.btncart);
+        databaseReference = FirebaseDatabase.getInstance().getReference("AddToCart").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
+        itemCounter = findViewById(R.id.number_button);
+        FloatingActionButton cartButton = findViewById(R.id.btncart);
 
-        food_description = findViewById(R.id.food_description);
         food_name = findViewById(R.id.food_name);
         food_price = findViewById(R.id.food_price);
 
-        food_image = findViewById(R.id.img_food);
+        ImageView food_image = findViewById(R.id.img_food);
 
-        collapsingToolbarLayout = findViewById(R.id.collapsing);
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppbar);
 
@@ -54,21 +49,11 @@ public class FoodDetail extends AppCompatActivity {
         if (resourceId != 0)
             food_image.setImageResource(resourceId);
 
-
-
-        btncart.setOnClickListener(view -> {
-
-
-            HashMap<String, String> parameters = new HashMap<>();
-            parameters.put("Product_Name", food_name.getText().toString());
-            parameters.put("Product_Price", food_price.getText().toString());
-
-            // Since ID_Cart is generated at OnCreate, only the first item will be added,
-            // Subsequent items will just update it.
-            String ID_Cart = reference.push().getKey();
-            Log.d("Firebase", "onCreate: " + ID_Cart);
-            reference.child(ID_Cart).setValue(parameters);
-            startActivity(new Intent(FoodDetail.this, ShowCart.class));
+        cartButton.setOnClickListener(view -> {
+            String ID_Cart = databaseReference.push().getKey();
+            if (ID_Cart != null)
+                databaseReference.child(ID_Cart).setValue(new CartModel(Integer.parseInt(itemCounter.getNumber()), food_name.getText().toString(), Float.parseFloat(food_price.getText().toString())));
+            startActivity(new Intent(FoodDetail.this, Cart.class));
         });
     }
 }

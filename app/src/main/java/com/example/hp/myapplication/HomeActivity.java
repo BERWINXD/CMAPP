@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -28,23 +27,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.hp.myapplication.Common.Common;
-import com.example.hp.myapplication.Interface.ItemClickListener;
 import com.example.hp.myapplication.Model.Category;
 import com.example.hp.myapplication.Model.Order;
-import com.example.hp.myapplication.Model.User;
-import com.example.hp.myapplication.ViewHolder.MenuViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +68,7 @@ public class HomeActivity extends AppCompatActivity
 
         FloatingActionButton fab = findViewById(id.fab);
         fab.setOnClickListener(view -> {
-            Intent cart = new Intent(HomeActivity.this, ShowCart.class);
+            Intent cart = new Intent(HomeActivity.this, Cart.class);
             startActivity(cart);
         });
 
@@ -153,7 +142,7 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case id.nav_cart:
-                startActivity(new Intent(HomeActivity.this, ShowCart.class));
+                startActivity(new Intent(HomeActivity.this, Cart.class));
                 break;
             case id.nav_orders:
                 startActivity(new Intent(HomeActivity.this, Order.class));
