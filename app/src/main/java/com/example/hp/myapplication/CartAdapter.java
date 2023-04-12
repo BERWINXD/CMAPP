@@ -1,11 +1,13 @@
 package com.example.hp.myapplication;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hp.myapplication.CustomComponents.ElegantNumberButton;
@@ -17,12 +19,10 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
     private final List<CartModel> cart_modelList;
     private final DatabaseReference cartItemsReference;
-    private final TextView emptyCart;
 
-    public CartAdapter(List<CartModel> cart_models, DatabaseReference cartItemsReference, TextView emptyCart) {
+    public CartAdapter(List<CartModel> cart_models, DatabaseReference cartItemsReference) {
         this.cart_modelList = cart_models;
         this.cartItemsReference = cartItemsReference;
-        this.emptyCart = emptyCart;
     }
 
     @NonNull
@@ -38,14 +38,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
         holder.getPrice().setText(String.valueOf(cart_model.getProductPrice() * cart_model.getProductAmount()));
         holder.getAmount().setNumber(String.valueOf(cart_model.getProductAmount()));
         holder.getAmount().setOnValueChangeListener((view, oldValue, newValue) -> {
+            Log.d("", "onBindViewHolder: Value Changed");
             holder.getPrice().setText(String.valueOf(newValue * cart_model.getProductPrice()));
             if (newValue != 0)
                 cartItemsReference.child(cart_modelList.get(position).getKey()).child("productAmount").setValue(newValue);
-            else {
+            else
                 cartItemsReference.child(cart_modelList.get(position).getKey()).removeValue();
-                cart_modelList.clear();
-                emptyCart.setVisibility(View.VISIBLE);
-            }
         });
     }
 
